@@ -93,6 +93,8 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
 
     private int width = 0;
     private int height = 0;
+    private int cropperTopMargin = 0;
+    private int cropperBottomMargin = 0;
 
     private Uri mCameraCaptureURI;
     private String mCurrentMediaPath;
@@ -139,6 +141,8 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
         enableRotationGesture = options.hasKey("enableRotationGesture") && options.getBoolean("enableRotationGesture");
         disableCropperColorSetters = options.hasKey("disableCropperColorSetters") && options.getBoolean("disableCropperColorSetters");
         useFrontCamera = options.hasKey("useFrontCamera") && options.getBoolean("useFrontCamera");
+        cropperTopMargin = options.hasKey("cropperTopMargin") ? options.getInt("cropperTopMargin") : 0;
+        cropperBottomMargin = options.hasKey("cropperBottomMargin") ? options.getInt("cropperBottomMargin") : 0;
         this.options = options;
     }
 
@@ -680,7 +684,13 @@ class PickerModule extends ReactContextBaseJavaModule implements ActivityEventLi
             uCrop.withAspectRatio(width, height);
         }
 
-        uCrop.start(activity);
+        // Get the Intent and add margin extras
+        Intent cropIntent = uCrop.getIntent(activity);
+        cropIntent.setClass(activity, CustomUCropActivity.class);
+        cropIntent.putExtra(CustomUCropActivity.EXTRA_TOP_MARGIN, cropperTopMargin);
+        cropIntent.putExtra(CustomUCropActivity.EXTRA_BOTTOM_MARGIN, cropperBottomMargin);
+
+        activity.startActivityForResult(cropIntent, UCrop.REQUEST_CROP);
     }
 
     private void imagePickerResult(Activity activity, final int requestCode, final int resultCode, final Intent data) {
