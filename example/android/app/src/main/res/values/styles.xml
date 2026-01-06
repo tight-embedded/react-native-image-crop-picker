@@ -3,6 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+
+        <!-- Opt-out of edge-to-edge enforcement on Android 15 (API 35) -->
+        <!-- Note: This is a temporary solution and will not work when sdk target is Android 16+ -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
     </style>
 
 </resources>
