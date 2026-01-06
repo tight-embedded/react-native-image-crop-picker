@@ -23,7 +23,7 @@
 
         <activity
             android:name="com.reactnative.ivpusic.imagepicker.CustomUCropActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/UCropTheme" />
     </application>
 
 </manifest>
