@@ -22,7 +22,7 @@
         </provider>
 
         <activity
-            android:name="com.reactnative.ivpusic.imagepicker.CustomUCropActivity"
+            android:name="com.yalantis.ucrop.UCropActivity"
             android:theme="@style/UCropTheme" />
     </application>
 
